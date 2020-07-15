@@ -9,26 +9,29 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
+    
+    var landmark: Landmark
+    
     var body: some View {
         VStack {
-            MapView()
-                .frame(height:300)
+            MapView(coordinate: landmark.locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
-            Image("turtlerock")
-                .clipShape(Circle())
-                .shadow(radius: 10)
-                .offset(y:-130)
-                .padding(.bottom, -130)
+                .frame(height:300)
+            CircleImage(image: landmark.image)
+            .offset(y: -130)
+            .padding(.bottom, -130)
             
             VStack(alignment: .leading) {
                 
-                Text("Hello, Swift UI!!")
-                    .font(.title)
-                    .foregroundColor(Color.black)
+                Text(landmark.name)
+                .font(.title)
+                    
                 HStack {
-                    Text(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/)
+                    Text(landmark.park)
+                        .font(.subheadline)
                     Spacer()
-                    Text("Placeholder1")
+                    Text(landmark.state)
+                        .font(.subheadline)
                 }
             }
             .padding()
@@ -41,7 +44,7 @@ struct LandmarkDetail: View {
 
 struct LandmarkDetail_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkDetail()
+        LandmarkDetail(landmark: landmarkData[0])
     }
 }
 
